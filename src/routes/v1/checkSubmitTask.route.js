@@ -8,13 +8,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageUsers'), validate(checkSubmitTaskValidation.createcheckSubmitTask), checkSubmitTaskController.createcheckSubmitTask)
-  .get(auth('getcheckSubmitTasks'), validate(checkSubmitTaskValidation.getcheckSubmitTasks), checkSubmitTaskController.getcheckSubmitTasks);
+  .post(auth('manageUsers'), validate(checkSubmitTaskValidation.createCheckSubmitTask), checkSubmitTaskController.createCheckSubmitTask)
+  .get(auth('getcheckSubmitTasks'), validate(checkSubmitTaskValidation.getCheckSubmitTasks), checkSubmitTaskController.getCheckSubmitTasks);
 
 router
   .route('/:checkSubmitTaskId')
-  .get(auth('getcheckSubmitTasks'), validate(checkSubmitTaskValidation.getcheckSubmitTask), checkSubmitTaskController.getcheckSubmitTask)
-  .patch(auth('managecheckSubmitTasks'), validate(checkSubmitTaskValidation.updatecheckSubmitTask), checkSubmitTaskController.updatecheckSubmitTask)
-  .delete(auth('managecheckSubmitTasks'), validate(checkSubmitTaskValidation.deletecheckSubmitTask), checkSubmitTaskController.deletecheckSubmitTask);
+  .get(auth('getcheckSubmitTasks'), validate(checkSubmitTaskValidation.getCheckSubmitTask), checkSubmitTaskController.getCheckSubmitTask)
+  .patch(auth('managecheckSubmitTasks'), validate(checkSubmitTaskValidation.updateCheckSubmitTask), checkSubmitTaskController.updateCheckSubmitTask)
+  .delete(auth('managecheckSubmitTasks'), validate(checkSubmitTaskValidation.deleteCheckSubmitTask), checkSubmitTaskController.deleteCheckSubmitTask);
 
 module.exports = router;
