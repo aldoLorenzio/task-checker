@@ -2,6 +2,10 @@ const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
+const partRoute = require('./part.route');
+const subjectRoute = require('./subject.route');
+const submitTaskRoute = require('./submitTask.route');
+const checkSubmitTaskRoute = require('./checkSubmitTask.router');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -15,6 +19,22 @@ const defaultRoutes = [
     path: '/users',
     route: userRoute,
   },
+  {
+    path: '/part',
+    route: partRoute
+  },
+  {
+    path: '/subject',
+    route: subjectRoute
+  },
+  {
+    path: '/submitTask',
+    route: submitTaskRoute
+  },
+  {
+    path: '/checkSubmitTask',
+    route: checkSubmitTaskRoute
+  }
 ];
 
 const devRoutes = [
