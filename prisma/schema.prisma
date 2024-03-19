@@ -6,29 +6,72 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DB_URL")
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
-  email     String?    @unique
-  password  String    
-  role      String    @default("user")
-  createdAt DateTime  @default(now())
-  updateAt  DateTime  @default(now())
-  isEmailVerified Boolean @default(false)
-  tokens    Token[]
+  id                    String    @id @default(uuid())
+  name                  String
+  email                 String?   @unique
+  password              String    
+  role                  String    @default("user")
+  isEmailVerified       Boolean   @default(false)
+  tokens                Token[]
+  submitTask            SubmitTask[]
+  createdAt             DateTime  @default(now())
+  updateAt              DateTime  @updatedAt
 }
 model Token {
-  id        String    @id @default(uuid())
-  token     String    @db.VarChar(400)
-  userId    String    
-  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type      String
-  expires   DateTime
-  blacklisted Boolean @default(false)
-  createdAt DateTime  @default(now())
-  updateAt  DateTime  @default(now())
+  id                    String    @id @default(uuid())
+  token                 String    @db.VarChar(400)
+  userId                String    
+  User                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type                  String
+  expires               DateTime
+  blacklisted           Boolean   @default(false)
+  createdAt             DateTime  @default(now())
+  updateAt              DateTime  @updatedAt
+}
+
+model Part {
+  id                    String    @id @default(uuid())
+  partName              String
+  subjects              Subject[]
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
+
+model Subject {
+  id                    String    @id @default(uuid())
+  partId                String
+  part                  Part      @relation(fields: [partId], references: [id])
+  title                 String
+  description           String
+  submitTask            SubmitTask[]
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
+
+model SubmitTask {
+  id                    String    @id @default(uuid())
+  subjectId             String
+  subject               Subject   @relation(fields: [subjectId], references: [id])
+  answer                String
+  result                Boolean   @default(false)
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id])
+  checkSubmitTask       checkSubmitTask[]
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
+
+model checkSubmitTask {
+  id                    String      @id @default(uuid())
+  submitTaskId          String
+  submitTask            SubmitTask  @relation(fields: [submitTaskId], references: [id])
+  result                Boolean
+  comment               String
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
 }
