@@ -4,7 +4,7 @@ const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { submitTaskService } = require('../services');
 
-const createsubmitTask = catchAsync(async (req, res) => {
+const createSubmitTask = catchAsync(async (req, res) => {
   const submitTask = await submitTaskService.createSubmitTask(req.body);
 
   res.status(httpStatus.CREATED).send({
@@ -14,7 +14,7 @@ const createsubmitTask = catchAsync(async (req, res) => {
   });
 });
 
-const getsubmitTasks = catchAsync(async (req, res) => {
+const getSubmitTasks = catchAsync(async (req, res) => {
   const filter = { submitTask: req.query.submitTask }
   const options ={
     sortBy: req.query.sortBy,
@@ -22,7 +22,7 @@ const getsubmitTasks = catchAsync(async (req, res) => {
     skip: req.query.skip
   }
 
-  const result = await submitTaskService.querysubmitTasks(filter,options);
+  const result = await submitTaskService.querySubmitTasks(filter,options);
   
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
@@ -31,8 +31,8 @@ const getsubmitTasks = catchAsync(async (req, res) => {
   });
 });
 
-const getsubmitTask = catchAsync(async (req, res) => {
-  const submitTask = await submitTaskService.getsubmitTaskById(req.params.submitTaskId);
+const getSubmitTask = catchAsync(async (req, res) => {
+  const submitTask = await submitTaskService.getSubmitTaskById(req.params.submitTaskId);
   if (!submitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'submitTask not found');
   }
@@ -44,8 +44,8 @@ const getsubmitTask = catchAsync(async (req, res) => {
   });
 });
 
-const updatesubmitTask = catchAsync(async (req, res) => {
-  const submitTask = await submitTaskService.updatesubmitTaskById(req.params.submitTaskId, req.body);
+const updateSubmitTask = catchAsync(async (req, res) => {
+  const submitTask = await submitTaskService.updateSubmitTaskById(req.params.submitTaskId, req.body);
   
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
@@ -54,8 +54,8 @@ const updatesubmitTask = catchAsync(async (req, res) => {
   });
 });
 
-const deletesubmitTask = catchAsync(async (req, res) => {
-  await submitTaskService.deletesubmitTaskById(req.params.submitTaskId);
+const deleteSubmitTask = catchAsync(async (req, res) => {
+  await submitTaskService.deleteSubmitTaskById(req.params.submitTaskId);
   
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
@@ -65,9 +65,9 @@ const deletesubmitTask = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  createsubmitTask,
-  getsubmitTasks,
-  getsubmitTask,
-  updatesubmitTask,
-  deletesubmitTask,
+  createSubmitTask,
+  getSubmitTasks,
+  getSubmitTask,
+  updateSubmitTask,
+  deleteSubmitTask,
 };
