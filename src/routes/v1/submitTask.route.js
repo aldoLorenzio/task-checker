@@ -8,13 +8,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageUsers'), validate(submitTaskValidation.createsubmitTask), submitTaskController.createSubmitTask)
-  .get(auth('getSubmitTasks'), validate(submitTaskValidation.getsubmitTasks), submitTaskController.getSubmitTasks);
+  .post(auth('manageSubmitTask'), validate(submitTaskValidation.createsubmitTask), submitTaskController.createSubmitTask)
+  .get(auth('manageSubmitTask'), validate(submitTaskValidation.getsubmitTasks), submitTaskController.getSubmitTasks);
 
 router
   .route('/:submitTaskId')
-  .get(auth('getSubmitTasks'), validate(submitTaskValidation.getsubmitTask), submitTaskController.getSubmitTask)
-  .patch(auth('manageSubmitTasks'), validate(submitTaskValidation.updatesubmitTask), submitTaskController.updateSubmitTask)
-  .delete(auth('manageSubmitTasks'), validate(submitTaskValidation.deletesubmitTask), submitTaskController.deleteSubmitTask);
+  .get(auth('manageSubmitTask'), validate(submitTaskValidation.getsubmitTask), submitTaskController.getSubmitTask)
+  .patch(auth('manageSubmitTask'), validate(submitTaskValidation.updatesubmitTask), submitTaskController.updateSubmitTask)
+  .delete(auth('manageSubmitTask'), validate(submitTaskValidation.deletesubmitTask), submitTaskController.deleteSubmitTask);
 
 module.exports = router;
