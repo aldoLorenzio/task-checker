@@ -3,17 +3,17 @@ const { objectId } = require('./custom.validation');
 
 const createCheckSubmitTask = {
   body: Joi.object().keys({
-    submitTaskId : Joi.string().required().custom(objectId),
-    result : Joi.boolean(),
-    comment : Joi.string().required()
+    submitTaskId: Joi.string().required().custom(objectId),
+    result: Joi.boolean(),
+    comment: Joi.string().required(),
   }),
 };
 
 const getCheckSubmitTasks = {
   query: Joi.object().keys({
-    submitTaskId : Joi.string().required().custom(objectId),
-    result : Joi.boolean(),
-    comment : Joi.string().required(),
+    submitTaskId: Joi.string().required().custom(objectId),
+    result: Joi.boolean(),
+    comment: Joi.string().required(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -32,9 +32,9 @@ const updateCheckSubmitTask = {
   }),
   body: Joi.object()
     .keys({
-      submitTaskId : Joi.string().required().custom(objectId),
-      result : Joi.boolean(),
-      comment : Joi.string().required()
+      submitTaskId: Joi.string().required().custom(objectId),
+      result: Joi.boolean(),
+      comment: Joi.string().required(),
     })
     .min(1),
 };

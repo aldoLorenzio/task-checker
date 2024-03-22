@@ -8,13 +8,29 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('admin'), validate(checkSubmitTaskValidation.createCheckSubmitTask), checkSubmitTaskController.createCheckSubmitTask)
-  .get(auth('admin'), validate(checkSubmitTaskValidation.getCheckSubmitTasks), checkSubmitTaskController.getCheckSubmitTasks);
+  .post(
+    auth('admin'),
+    validate(checkSubmitTaskValidation.createCheckSubmitTask),
+    checkSubmitTaskController.createCheckSubmitTask
+  )
+  .get(
+    auth('admin'),
+    validate(checkSubmitTaskValidation.getCheckSubmitTasks),
+    checkSubmitTaskController.getCheckSubmitTasks
+  );
 
 router
   .route('/:checkSubmitTaskId')
   .get(auth('admin'), validate(checkSubmitTaskValidation.getCheckSubmitTask), checkSubmitTaskController.getCheckSubmitTask)
-  .patch(auth('admin'), validate(checkSubmitTaskValidation.updateCheckSubmitTask), checkSubmitTaskController.updateCheckSubmitTask)
-  .delete(auth('admin'), validate(checkSubmitTaskValidation.deleteCheckSubmitTask), checkSubmitTaskController.deleteCheckSubmitTask);
+  .patch(
+    auth('admin'),
+    validate(checkSubmitTaskValidation.updateCheckSubmitTask),
+    checkSubmitTaskController.updateCheckSubmitTask
+  )
+  .delete(
+    auth('admin'),
+    validate(checkSubmitTaskValidation.deleteCheckSubmitTask),
+    checkSubmitTaskController.deleteCheckSubmitTask
+  );
 
 module.exports = router;

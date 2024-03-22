@@ -1,30 +1,27 @@
 const httpStatus = require('http-status');
-const prisma = require('../../prisma/client')
+const prisma = require('../../prisma/client');
 const ApiError = require('../utils/ApiError');
-
 
 const createCheckSubmitTask = async (checkSubmitTaskBody) => {
   const submitTask = await prisma.submitTask.findUnique({
     where: {
-      id: checkSubmitTaskBody.submitTaskId
-    }
-  })
+      id: checkSubmitTaskBody.submitTaskId,
+    },
+  });
 
-
-  if(checkSubmitTaskBody.result == true){
+  if (checkSubmitTaskBody.result == true) {
     await prisma.submitTask.update({
-      where:{
-        id: submitTask.id
+      where: {
+        id: submitTask.id,
       },
-      data: {result: true}
-    })
+      data: { result: true },
+    });
   }
 
   return prisma.checkSubmitTask.create({
-    data: checkSubmitTaskBody
+    data: checkSubmitTaskBody,
   });
 };
-
 
 const queryCheckSubmitTasks = async (filter, options) => {
   const checkSubmitTasks = await prisma.checkSubmitTask.findMany();
@@ -34,28 +31,26 @@ const queryCheckSubmitTasks = async (filter, options) => {
 const getCheckSubmitTaskById = async (id) => {
   return prisma.checkSubmitTask.findFirst({
     where: {
-      id: id
-    }
-  })
+      id,
+    },
+  });
 };
-
 
 const updateCheckSubmitTaskById = async (checkSubmitTaskId, updateBody) => {
   const checkSubmitTask = await getCheckSubmitTaskById(checkSubmitTaskId);
   if (!checkSubmitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'checkSubmitTask not found');
   }
-  
+
   const updateCheckSubmitTask = await prisma.checkSubmitTask.update({
     where: {
       id: checkSubmitTaskId,
     },
-    data: updateBody
-  })
+    data: updateBody,
+  });
 
   return updateCheckSubmitTask;
 };
-
 
 const deleteCheckSubmitTaskById = async (checkSubmitTaskId) => {
   const checkSubmitTask = await getCheckSubmitTaskById(checkSubmitTaskId);
@@ -65,9 +60,9 @@ const deleteCheckSubmitTaskById = async (checkSubmitTaskId) => {
 
   const deleteCheckSubmitTasks = await prisma.checkSubmitTask.deleteMany({
     where: {
-      id: checkSubmitTaskId
+      id: checkSubmitTaskId,
     },
-  })
+  });
 
   return deleteCheckSubmitTasks;
 };

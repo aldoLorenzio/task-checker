@@ -21,20 +21,20 @@ const defaultRoutes = [
   },
   {
     path: '/part',
-    route: partRoute
+    route: partRoute,
   },
   {
     path: '/subject',
-    route: subjectRoute
+    route: subjectRoute,
   },
   {
     path: '/submitTask',
-    route: submitTaskRoute
+    route: submitTaskRoute,
   },
   {
     path: '/checkSubmitTask',
-    route: checkSubmitTaskRoute
-  }
+    route: checkSubmitTaskRoute,
+  },
 ];
 
 const devRoutes = [

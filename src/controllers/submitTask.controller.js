@@ -9,25 +9,25 @@ const createSubmitTask = catchAsync(async (req, res) => {
 
   res.status(httpStatus.CREATED).send({
     status: httpStatus.CREATED,
-    message: "Create submitTask Success",
-    data: submitTask
+    message: 'Create submitTask Success',
+    data: submitTask,
   });
 });
 
 const getSubmitTasks = catchAsync(async (req, res) => {
-  const filter = { submitTask: req.query.submitTask }
-  const options ={
+  const filter = { submitTask: req.query.submitTask };
+  const options = {
     sortBy: req.query.sortBy,
     take: req.query.take,
-    skip: req.query.skip
-  }
+    skip: req.query.skip,
+  };
 
-  const result = await submitTaskService.querySubmitTasks(filter,options);
-  
+  const result = await submitTaskService.querySubmitTasks(filter, options);
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Get submitTasks Success",
-    data: result
+    message: 'Get submitTasks Success',
+    data: result,
   });
 });
 
@@ -36,31 +36,31 @@ const getSubmitTask = catchAsync(async (req, res) => {
   if (!submitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'submitTask not found');
   }
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Get submitTask Success",
-    data: submitTask
+    message: 'Get submitTask Success',
+    data: submitTask,
   });
 });
 
 const updateSubmitTask = catchAsync(async (req, res) => {
   const submitTask = await submitTaskService.updateSubmitTaskById(req.params.submitTaskId, req.body);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Update submitTask Success",
-    data: submitTask
+    message: 'Update submitTask Success',
+    data: submitTask,
   });
 });
 
 const deleteSubmitTask = catchAsync(async (req, res) => {
   await submitTaskService.deleteSubmitTaskById(req.params.submitTaskId);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Delete submitTask Success",
-    data: null
+    message: 'Delete submitTask Success',
+    data: null,
   });
 });
 

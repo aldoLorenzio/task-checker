@@ -9,25 +9,25 @@ const createPart = catchAsync(async (req, res) => {
 
   res.status(httpStatus.CREATED).send({
     status: httpStatus.CREATED,
-    message: "Create Part Success",
-    data: part
+    message: 'Create Part Success',
+    data: part,
   });
 });
 
 const getParts = catchAsync(async (req, res) => {
-  const filter = { part: req.query.part }
+  const filter = { part: req.query.part };
   const options = {
     sortBy: req.query.sortBy,
     take: req.query.take,
     skip: req.query.skip,
-  }
+  };
 
   const result = await partService.queryParts(filter, options);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Get Parts Success",
-    data: result
+    message: 'Get Parts Success',
+    data: result,
   });
 });
 
@@ -36,31 +36,31 @@ const getPart = catchAsync(async (req, res) => {
   if (!part) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Part not found');
   }
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Get Part Success",
-    data: part
+    message: 'Get Part Success',
+    data: part,
   });
 });
 
 const updatePart = catchAsync(async (req, res) => {
   const part = await partService.updatePartById(req.params.partId, req.body);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Update Part Success",
-    data: part
+    message: 'Update Part Success',
+    data: part,
   });
 });
 
 const deletePart = catchAsync(async (req, res) => {
   await partService.deletePartById(req.params.partId);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Delete Part Success",
-    data: null
+    message: 'Delete Part Success',
+    data: null,
   });
 });
 

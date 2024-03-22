@@ -1,15 +1,14 @@
 const allRoles = {
   user: ['manageUsers', 'manageSubmitTask'],
-  admin: [
-    'admin',
-    'manageUsers',
-    'manageSubmitTask'],
+  admin: ['admin', 'manageUsers', 'manageSubmitTask'],
 };
 
 const roles = Object.keys(allRoles);
-const roleRights= new Map(Object.entries(allRoles));
+const roleRights = new Map(Object.entries(allRoles));
 
 module.exports = {
   roles,
   roleRights,
 };
+
+// test commit yarn
