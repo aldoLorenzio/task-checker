@@ -3,7 +3,22 @@ const prisma = require('../../prisma/client')
 const ApiError = require('../utils/ApiError');
 
 
-const createcheckSubmitTask = async (checkSubmitTaskBody) => {
+const createCheckSubmitTask = async (checkSubmitTaskBody) => {
+  const submitTask = await prisma.submitTask.findUnique({
+    where: {
+      id: checkSubmitTaskBody.submitTaskId
+    }
+  })
+
+
+  if(checkSubmitTaskBody.result == true){
+    await prisma.submitTask.update({
+      where:{
+        id: submitTask.id
+      },
+      data: {result: true}
+    })
+  }
 
   return prisma.checkSubmitTask.create({
     data: checkSubmitTaskBody
@@ -11,12 +26,12 @@ const createcheckSubmitTask = async (checkSubmitTaskBody) => {
 };
 
 
-const querycheckSubmitTasks = async (filter, options) => {
+const queryCheckSubmitTasks = async (filter, options) => {
   const checkSubmitTasks = await prisma.checkSubmitTask.findMany();
   return checkSubmitTasks;
 };
 
-const getcheckSubmitTaskById = async (id) => {
+const getCheckSubmitTaskById = async (id) => {
   return prisma.checkSubmitTask.findFirst({
     where: {
       id: id
@@ -25,42 +40,42 @@ const getcheckSubmitTaskById = async (id) => {
 };
 
 
-const updatecheckSubmitTaskById = async (checkSubmitTaskId, updateBody) => {
-  const checkSubmitTask = await getcheckSubmitTaskById(checkSubmitTaskId);
+const updateCheckSubmitTaskById = async (checkSubmitTaskId, updateBody) => {
+  const checkSubmitTask = await getCheckSubmitTaskById(checkSubmitTaskId);
   if (!checkSubmitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'checkSubmitTask not found');
   }
   
-  const updatecheckSubmitTask = await prisma.checkSubmitTask.update({
+  const updateCheckSubmitTask = await prisma.checkSubmitTask.update({
     where: {
       id: checkSubmitTaskId,
     },
     data: updateBody
   })
 
-  return updatecheckSubmitTask;
+  return updateCheckSubmitTask;
 };
 
 
-const deletecheckSubmitTaskById = async (checkSubmitTaskId) => {
-  const checkSubmitTask = await getcheckSubmitTaskById(checkSubmitTaskId);
+const deleteCheckSubmitTaskById = async (checkSubmitTaskId) => {
+  const checkSubmitTask = await getCheckSubmitTaskById(checkSubmitTaskId);
   if (!checkSubmitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'checkSubmitTask not found');
   }
 
-  const deletecheckSubmitTasks = await prisma.checkSubmitTask.deleteMany({
+  const deleteCheckSubmitTasks = await prisma.checkSubmitTask.deleteMany({
     where: {
       id: checkSubmitTaskId
     },
   })
 
-  return deletecheckSubmitTasks;
+  return deleteCheckSubmitTasks;
 };
 
 module.exports = {
-  createcheckSubmitTask,
-  querycheckSubmitTasks,
-  getcheckSubmitTaskById,
-  updatecheckSubmitTaskById,
-  deletecheckSubmitTaskById,
+  createCheckSubmitTask,
+  queryCheckSubmitTasks,
+  getCheckSubmitTaskById,
+  updateCheckSubmitTaskById,
+  deleteCheckSubmitTaskById,
 };

@@ -5,7 +5,8 @@ const allRoles = {
     'manageUsers',
     'getPart',
     'getSubjects',
-    'getSubmitTasks'],
+    'getSubmitTasks',
+    'getCheckSubmitTasks'],
 };
 
 const roles = Object.keys(allRoles);

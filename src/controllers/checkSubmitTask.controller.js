@@ -5,7 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { checkSubmitTaskService } = require('../services');
 
 const createCheckSubmitTask = catchAsync(async (req, res) => {
-  const checkSubmitTask = await checkSubmitTaskService.createcheckSubmitTask(req.body);
+  const checkSubmitTask = await checkSubmitTaskService.createCheckSubmitTask(req.body);
 
   res.status(httpStatus.CREATED).send({
     status: httpStatus.CREATED,
@@ -22,7 +22,7 @@ const getCheckSubmitTasks = catchAsync(async (req, res) => {
     skip: req.query.skip
   }
 
-  const result = await checkSubmitTaskService.querycheckSubmitTasks(filter,options);
+  const result = await checkSubmitTaskService.queryCheckSubmitTasks(filter,options);
   
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
@@ -32,7 +32,7 @@ const getCheckSubmitTasks = catchAsync(async (req, res) => {
 });
 
 const getCheckSubmitTask = catchAsync(async (req, res) => {
-  const checkSubmitTask = await checkSubmitTaskService.getcheckSubmitTaskById(req.params.checkSubmitTaskId);
+  const checkSubmitTask = await checkSubmitTaskService.getCheckSubmitTaskById(req.params.checkSubmitTaskId);
   if (!checkSubmitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'checkSubmitTask not found');
   }
@@ -45,7 +45,7 @@ const getCheckSubmitTask = catchAsync(async (req, res) => {
 });
 
 const updateCheckSubmitTask = catchAsync(async (req, res) => {
-  const checkSubmitTask = await checkSubmitTaskService.updatecheckSubmitTaskById(req.params.checkSubmitTaskId, req.body);
+  const checkSubmitTask = await checkSubmitTaskService.updateCheckSubmitTaskById(req.params.checkSubmitTaskId, req.body);
   
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
@@ -55,7 +55,7 @@ const updateCheckSubmitTask = catchAsync(async (req, res) => {
 });
 
 const deleteCheckSubmitTask = catchAsync(async (req, res) => {
-  await checkSubmitTaskService.deletecheckSubmitTaskById(req.params.checkSubmitTaskId);
+  await checkSubmitTaskService.deleteCheckSubmitTaskById(req.params.checkSubmitTaskId);
   
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
