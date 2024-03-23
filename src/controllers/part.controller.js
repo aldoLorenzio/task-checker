@@ -3,6 +3,7 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { partService } = require('../services');
+const { http } = require('winston');
 
 const createPart = catchAsync(async (req, res) => {
   const part = await partService.createPart(req.body);
@@ -54,15 +55,15 @@ const updatePart = catchAsync(async (req, res) => {
   });
 });
 
-const deletePart = catchAsync(async (req, res) => {
-  await partService.deletePartById(req.params.partId);
+const deletePart = catchAsync(async (req,res) => {
+  await partService.deletePartById(req.params.partId)
 
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: 'Delete Part Success',
-    data: null,
-  });
-});
+    message: 'Delete Part success',
+    data: null
+  })
+})
 
 module.exports = {
   createPart,

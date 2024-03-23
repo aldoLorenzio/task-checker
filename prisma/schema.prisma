@@ -45,7 +45,7 @@ model Part {
 model Subject {
   id                    String    @id @default(uuid())
   partId                String
-  part                  Part      @relation(fields: [partId], references: [id])
+  part                  Part      @relation(fields: [partId], references: [id], onDelete: Cascade)
   title                 String
   description           String
   submitTask            SubmitTask[]

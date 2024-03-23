@@ -62,13 +62,13 @@ const deletePartById = async (partId) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Part not found');
   }
 
-  const deleteParts = await prisma.part.deleteMany({
+  const deletePart = await prisma.part.deleteMany({
     where: {
       id: partId,
     },
   });
 
-  return deleteParts;
+  return deletePart
 };
 
 module.exports = {
