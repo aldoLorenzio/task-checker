@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
-const prisma = require('../../prisma/client')
-const ApiError = require('../utils/ApiError');
 const bcrypt = require('bcryptjs');
+const prisma = require('../../prisma/client');
+const ApiError = require('../utils/ApiError');
 
 /**
  * Create a user
@@ -12,7 +12,7 @@ const createUser = async (userBody) => {
   userBody.password = bcrypt.hashSync(userBody.password, 8);
 
   return prisma.user.create({
-    data: userBody
+    data: userBody,
   });
 };
 
@@ -21,7 +21,17 @@ const createUser = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
-  const users = await prisma.user.findMany();
+  const { user } = filter;
+  const { take, skip } = options;
+  const users = await prisma.user.findMany({
+    where:{
+      name:{
+        contains: user
+      },
+    },
+    take: take && parseInt(take),
+    skip: skip && parseInt(skip),
+  });
   return users;
 };
 
@@ -33,9 +43,9 @@ const queryUsers = async (filter, options) => {
 const getUserById = async (id) => {
   return prisma.user.findFirst({
     where: {
-      id: id
-    }
-  })
+      id,
+    },
+  });
 };
 
 /**
@@ -45,7 +55,7 @@ const getUserById = async (id) => {
  */
 const getUserByEmail = async (email) => {
   return prisma.user.findUnique({
-    where: { email }
+    where: { email },
   });
 };
 
@@ -63,22 +73,17 @@ const updateUserById = async (userId, updateBody) => {
   if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
-  
+
   const updateUser = await prisma.user.update({
     where: {
       id: userId,
     },
-    data: updateBody
-  })
+    data: updateBody,
+  });
 
   return updateUser;
 };
 
-/**
- * Delete user by id
- * @param {ObjectId} userId
- * @returns {Promise<User>}
- */
 const deleteUserById = async (userId) => {
   const user = await getUserById(userId);
   if (!user) {
@@ -87,12 +92,22 @@ const deleteUserById = async (userId) => {
 
   const deleteUsers = await prisma.user.deleteMany({
     where: {
-      id: userId
+      id: userId,
     },
-  })
+  });
 
   return deleteUsers;
 };
+
+const querySubmitTask = async (userId) => {
+  const submitTask = await prisma.user.findMany({
+    where:{id: userId},
+    include:{submitTask: true}
+  })
+
+  return submitTask
+}
+
 
 module.exports = {
   createUser,
@@ -101,4 +116,5 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
+  querySubmitTask
 };

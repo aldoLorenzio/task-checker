@@ -9,25 +9,25 @@ const createSubject = catchAsync(async (req, res) => {
 
   res.status(httpStatus.CREATED).send({
     status: httpStatus.CREATED,
-    message: "Create Subject Success",
-    data: subject
+    message: 'Create Subject Success',
+    data: subject,
   });
 });
 
 const getSubjects = catchAsync(async (req, res) => {
-  const filter = { subject: req.query.subject }
-  const options ={
+  const filter = { subject: req.query.subject };
+  const options = {
     sortBy: req.query.sortBy,
     take: req.query.take,
-    skip: req.query.skip
-  }
+    skip: req.query.skip,
+  };
 
-  const result = await subjectService.querySubjects(filter,options);
-  
+  const result = await subjectService.querySubjects(filter, options);
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Get Subjects Success",
-    data: result
+    message: 'Get Subjects Success',
+    data: result,
   });
 });
 
@@ -36,31 +36,31 @@ const getSubject = catchAsync(async (req, res) => {
   if (!subject) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Subject not found');
   }
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Get Subject Success",
-    data: subject
+    message: 'Get Subject Success',
+    data: subject,
   });
 });
 
 const updateSubject = catchAsync(async (req, res) => {
   const subject = await subjectService.updateSubjectById(req.params.subjectId, req.body);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Update Subject Success",
-    data: subject
+    message: 'Update Subject Success',
+    data: subject,
   });
 });
 
 const deleteSubject = catchAsync(async (req, res) => {
   await subjectService.deleteSubjectById(req.params.subjectId);
-  
+
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
-    message: "Delete Subject Success",
-    data: null
+    message: 'Delete Subject Success',
+    data: null,
   });
 });
 

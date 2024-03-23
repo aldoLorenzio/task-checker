@@ -8,13 +8,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageUsers'), validate(partValidation.createPart), partController.createPart)
-  .get(auth('getPart'), validate(partValidation.getParts), partController.getParts);
+  .post(auth('admin'), validate(partValidation.createPart), partController.createPart)
+  .get(auth('admin'), validate(partValidation.getParts), partController.getParts);
 
 router
   .route('/:partId')
-  .get(auth('getPart'), validate(partValidation.getPart), partController.getPart)
-  .patch(auth('manageUsers'), validate(partValidation.updatePart), partController.updatePart)
-  .delete(auth('manageUsers'), validate(partValidation.deletePart), partController.deletePart);
+  .get(auth('admin'), validate(partValidation.getPart), partController.getPart)
+  .patch(auth('admin'), validate(partValidation.updatePart), partController.updatePart)
+  .delete(auth('admin'), validate(partValidation.deletePart), partController.deletePart);
 
 module.exports = router;

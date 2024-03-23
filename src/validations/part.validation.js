@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { password, objectId } = require('./custom.validation');
+const { objectId } = require('./custom.validation');
 
 const createPart = {
   body: Joi.object().keys({
@@ -28,7 +28,7 @@ const updatePart = {
   }),
   body: Joi.object()
     .keys({
-      partName: Joi.string().required()
+      partName: Joi.string().required(),
     })
     .min(1),
 };

@@ -1,10 +1,6 @@
 const allRoles = {
-  user: [],
-  admin: [
-    'getUsers',
-    'manageUsers',
-    'getPart',
-    'getSubjects'],
+  user: ['manageUsers', 'manageSubmitTask'],
+  admin: ['admin', 'manageUsers', 'manageSubmitTask'],
 };
 
 const roles = Object.keys(allRoles);
@@ -14,3 +10,5 @@ module.exports = {
   roles,
   roleRights,
 };
+
+// test commit yarn

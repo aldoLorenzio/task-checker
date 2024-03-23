@@ -1,12 +1,12 @@
 const Joi = require('joi');
-const { password, objectId } = require('./custom.validation');
+const { objectId } = require('./custom.validation');
 
 const createsubmitTask = {
   body: Joi.object().keys({
     subjectId: Joi.string().required().custom(objectId),
     answer: Joi.string().required(),
     result: Joi.boolean(),
-    userId: Joi.string().required().custom(objectId)
+    userId: Joi.string().required().custom(objectId),
   }),
 };
 
@@ -34,7 +34,7 @@ const updatesubmitTask = {
       subjectId: Joi.string().required().custom(objectId),
       answer: Joi.string().required(),
       result: Joi.boolean(),
-      userId: Joi.string().required().custom(objectId)
+      userId: Joi.string().required().custom(objectId),
     })
     .min(1),
 };

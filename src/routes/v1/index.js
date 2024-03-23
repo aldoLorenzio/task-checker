@@ -5,7 +5,7 @@ const docsRoute = require('./docs.route');
 const partRoute = require('./part.route');
 const subjectRoute = require('./subject.route');
 const submitTaskRoute = require('./submitTask.route');
-const checkSubmitTaskRoute = require('./checkSubmitTask.router');
+const checkSubmitTaskRoute = require('./checkSubmitTask.route');
 const config = require('../../config/config');
 
 const router = express.Router();
@@ -21,20 +21,20 @@ const defaultRoutes = [
   },
   {
     path: '/part',
-    route: partRoute
+    route: partRoute,
   },
   {
     path: '/subject',
-    route: subjectRoute
+    route: subjectRoute,
   },
   {
     path: '/submitTask',
-    route: submitTaskRoute
+    route: submitTaskRoute,
   },
   {
     path: '/checkSubmitTask',
-    route: checkSubmitTaskRoute
-  }
+    route: checkSubmitTaskRoute,
+  },
 ];
 
 const devRoutes = [
