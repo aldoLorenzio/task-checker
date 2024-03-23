@@ -21,7 +21,17 @@ const createUser = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
-  const users = await prisma.user.findMany();
+  const { user } = filter;
+  const { take, skip } = options;
+  const users = await prisma.user.findMany({
+    where:{
+      name:{
+        contains: user
+      },
+    },
+    take: take && parseInt(take),
+    skip: skip && parseInt(skip),
+  });
   return users;
 };
 
@@ -74,11 +84,6 @@ const updateUserById = async (userId, updateBody) => {
   return updateUser;
 };
 
-/**
- * Delete user by id
- * @param {ObjectId} userId
- * @returns {Promise<User>}
- */
 const deleteUserById = async (userId) => {
   const user = await getUserById(userId);
   if (!user) {
@@ -94,6 +99,16 @@ const deleteUserById = async (userId) => {
   return deleteUsers;
 };
 
+const querySubmitTask = async (userId) => {
+  const submitTask = await prisma.user.findMany({
+    where:{id: userId},
+    include:{submitTask: true}
+  })
+
+  return submitTask
+}
+
+
 module.exports = {
   createUser,
   queryUsers,
@@ -101,4 +116,5 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
+  querySubmitTask
 };

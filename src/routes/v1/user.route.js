@@ -17,6 +17,12 @@ router
   .patch(auth('admin'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('admin'), validate(userValidation.deleteUser), userController.deleteUser);
 
+
+router.route('/:userId/submit').get(auth('admin'), validate(userValidation.getUser), userController.querySubmit)
+
+
+  
+
 module.exports = router;
 
 /**

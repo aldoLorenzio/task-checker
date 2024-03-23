@@ -15,7 +15,13 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const getUsers = catchAsync(async (req, res) => {
-  const result = await userService.queryUsers();
+  const filter = {user: req.query.user};
+  const options = {
+    sortBy: req.query.sortBy,
+    take: req.query.take,
+    skip: req.query.skip
+  }
+  const result = await userService.queryUsers(filter, options);
 
   res.status(httpStatus.OK).send({
     status: httpStatus.OK,
@@ -57,10 +63,21 @@ const deleteUser = catchAsync(async (req, res) => {
   });
 });
 
+const querySubmit = catchAsync(async (req,res) => {
+  const user = await userService.querySubmitTask(req.params.userId);
+
+  res.status(httpStatus.OK).send({
+    status: httpStatus.OK,
+    message: 'Get submitTask by User Success',
+    data: user
+  })
+})
+
 module.exports = {
   createUser,
   getUsers,
   getUser,
   updateUser,
   deleteUser,
+  querySubmit
 };
