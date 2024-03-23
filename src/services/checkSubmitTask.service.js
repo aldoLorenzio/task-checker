@@ -1,6 +1,8 @@
 const httpStatus = require('http-status');
 const prisma = require('../../prisma/client');
 const ApiError = require('../utils/ApiError');
+const { submitTaskService } = require('.');
+const { getSubmitTaskById } = require('./submitTask.service');
 
 const createCheckSubmitTask = async (checkSubmitTaskBody) => {
   const submitTask = await prisma.submitTask.findUnique({
@@ -40,6 +42,22 @@ const updateCheckSubmitTaskById = async (checkSubmitTaskId, updateBody) => {
   const checkSubmitTask = await getCheckSubmitTaskById(checkSubmitTaskId);
   if (!checkSubmitTask) {
     throw new ApiError(httpStatus.NOT_FOUND, 'checkSubmitTask not found');
+  }
+
+  if(updateBody.result == false){
+    await prisma.submitTask.update({
+      where:{
+        id: checkSubmitTask.submitTaskId
+      },
+      data: {result: false}
+    })
+  }else{
+    await prisma.submitTask.update({
+      where:{
+        id: checkSubmitTask.submitTaskId
+      },
+      data: {result: true}
+    })
   }
 
   const updateCheckSubmitTask = await prisma.checkSubmitTask.update({

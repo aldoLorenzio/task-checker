@@ -11,9 +11,9 @@ const createCheckSubmitTask = {
 
 const getCheckSubmitTasks = {
   query: Joi.object().keys({
-    submitTaskId: Joi.string().required().custom(objectId),
+    submitTaskId: Joi.string().custom(objectId),
     result: Joi.boolean(),
-    comment: Joi.string().required(),
+    comment: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -32,9 +32,9 @@ const updateCheckSubmitTask = {
   }),
   body: Joi.object()
     .keys({
-      submitTaskId: Joi.string().required().custom(objectId),
+      submitTaskId: Joi.string().custom(objectId),
       result: Joi.boolean(),
-      comment: Joi.string().required(),
+      comment: Joi.string(),
     })
     .min(1),
 };

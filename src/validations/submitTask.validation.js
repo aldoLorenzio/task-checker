@@ -5,7 +5,7 @@ const createsubmitTask = {
   body: Joi.object().keys({
     subjectId: Joi.string().required().custom(objectId),
     answer: Joi.string().required(),
-    result: Joi.boolean(),
+    result: Joi.boolean().valid(false),
     userId: Joi.string().required().custom(objectId),
   }),
 };
@@ -33,7 +33,7 @@ const updatesubmitTask = {
     .keys({
       subjectId: Joi.string().custom(objectId),
       answer: Joi.string(),
-      result: Joi.boolean(),
+      result: Joi.boolean().valid(false),
       userId: Joi.string().custom(objectId),
     })
     .min(1),
