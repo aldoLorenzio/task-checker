@@ -56,11 +56,11 @@ model Subject {
 model SubmitTask {
   id                    String    @id @default(uuid())
   subjectId             String
-  subject               Subject   @relation(fields: [subjectId], references: [id])
+  subject               Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   answer                String
   result                Boolean   @default(false)
   userId                String
-  user                  User      @relation(fields: [userId], references: [id])
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   checkSubmitTask       checkSubmitTask[]
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
@@ -69,7 +69,7 @@ model SubmitTask {
 model checkSubmitTask {
   id                    String      @id @default(uuid())
   submitTaskId          String
-  submitTask            SubmitTask  @relation(fields: [submitTaskId], references: [id])
+  submitTask            SubmitTask  @relation(fields: [submitTaskId], references: [id], onDelete: Cascade)
   result                Boolean
   comment               String
   createdAt             DateTime    @default(now())
