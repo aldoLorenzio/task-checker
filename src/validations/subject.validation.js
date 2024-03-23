@@ -29,9 +29,9 @@ const updateSubject = {
   }),
   body: Joi.object()
     .keys({
-      partId: Joi.string().custom(objectId).required(),
-      title: Joi.string().required(),
-      description: Joi.string().required(),
+      partId: Joi.string().custom(objectId),
+      title: Joi.string(),
+      description: Joi.string(),
     })
     .min(1),
 };
