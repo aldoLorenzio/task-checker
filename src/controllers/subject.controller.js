@@ -64,10 +64,21 @@ const deleteSubject = catchAsync(async (req, res) => {
   });
 });
 
+const querySubmitTaskBySubject = catchAsync(async (req,res) =>{
+  const querySubmitTask = await subjectService.querySubmitTaskBySubject(req.params.subjectId)
+
+  res.status(httpStatus.OK).send({
+    status: httpStatus.OK,
+    message: 'Get Submit Task by Subject Success',
+    data: querySubmitTask
+  })
+})
+
 module.exports = {
   createSubject,
   getSubjects,
   getSubject,
   updateSubject,
   deleteSubject,
+  querySubmitTaskBySubject
 };

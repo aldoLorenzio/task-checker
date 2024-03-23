@@ -17,4 +17,8 @@ router
   .patch(auth('admin'), validate(subjectValidation.updateSubject), subjectController.updateSubject)
   .delete(auth('admin'), validate(subjectValidation.deleteSubject), subjectController.deleteSubject);
 
+router
+  .route('/:subjectId/submit')
+  .get(auth('admin'), validate(subjectValidation.getSubject), subjectController.querySubmitTaskBySubject)
+
 module.exports = router;

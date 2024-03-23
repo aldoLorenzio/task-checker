@@ -31,10 +31,10 @@ const updatesubmitTask = {
   }),
   body: Joi.object()
     .keys({
-      subjectId: Joi.string().required().custom(objectId),
-      answer: Joi.string().required(),
+      subjectId: Joi.string().custom(objectId),
+      answer: Joi.string(),
       result: Joi.boolean(),
-      userId: Joi.string().required().custom(objectId),
+      userId: Joi.string().custom(objectId),
     })
     .min(1),
 };

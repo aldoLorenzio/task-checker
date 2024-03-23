@@ -62,10 +62,20 @@ const deleteSubjectById = async (subjectId) => {
   return deleteSubjects;
 };
 
+const querySubmitTaskBySubject = async (subjectId) => {
+  const submitTask = await prisma.subject.findMany({
+    where: {id: subjectId},
+    include: {submitTask: true}
+  })
+
+  return submitTask
+}
+
 module.exports = {
   createSubject,
   querySubjects,
   getSubjectById,
   updateSubjectById,
   deleteSubjectById,
+  querySubmitTaskBySubject
 };
