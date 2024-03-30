@@ -12,8 +12,13 @@ const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
+const path = require('path')
 
 const app = express();
+
+app.set('view engine', 'ejs'); //register the template engine
+app.set('/views', path.join(__dirname, 'views')); //specify views directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 if (config.env !== 'test') {
   app.use(morgan.successHandler);

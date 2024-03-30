@@ -6,8 +6,16 @@ const auth = require('../../middlewares/auth');
 
 const router = express.Router();
 
-router.post('/register', validate(authValidation.register), authController.register);
-router.post('/login', validate(authValidation.login), authController.login);
+router
+    .route('/register')
+    .post(validate(authValidation.register), authController.register)
+    .get(authController.registerView)
+
+router
+    .route('/login')
+    .post(validate(authValidation.login), authController.login)
+    .get(authController.loginView)
+
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);

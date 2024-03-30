@@ -17,7 +17,8 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check **/*.js",
     "prettier:fix": "prettier --write **/*.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tailwind:css": "npx tailwindcss -i ./src/public/css/input.css -o ./src/public/css/output.css --watch"
   },
   "keywords": [
     "node",
@@ -45,6 +46,7 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.0",
     "dotenv": "^10.0.0",
+    "ejs": "^3.1.9",
     "express": "^4.17.1",
     "express-rate-limit": "^5.0.0",
     "helmet": "^4.1.0",
@@ -57,6 +59,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "pm2": "^5.1.0",
+    "postcss-cli": "^11.0.0",
     "swagger-jsdoc": "^6.0.8",
     "swagger-ui-express": "^4.1.6",
     "validator": "^13.0.0",
@@ -64,6 +67,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.19",
     "coveralls": "^3.0.7",
     "eslint": "^7.0.0",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -78,8 +82,10 @@
     "lint-staged": "^11.0.0",
     "node-mocks-http": "^1.8.0",
     "nodemon": "^2.0.0",
+    "postcss": "^8.4.38",
     "prettier": "^2.0.5",
     "prisma": "^4.9.0",
-    "supertest": "^6.0.1"
+    "supertest": "^6.0.1",
+    "tailwindcss": "^3.4.3"
   }
 }
